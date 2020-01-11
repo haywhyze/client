@@ -1,24 +1,11 @@
 html {
-  font-size: 15px;
   font-family: 'Roboto', sans-serif;
-}
-
-body {
-  overflow-x: hidden;
 }
 
 a {
   text-decoration: none;
 }
 
-section {
-  padding: 10 rem 0;
-  background-color: #ffffff;
-}
-
-.container {
-  align-content: center;
-}
 
 /* Workout img styling */
 .workout-img {
@@ -78,14 +65,6 @@ section {
   font-weight: 300;
 }
 
-.coolstuff {
-  font-size: 2.5rem;
-  color: #6bbdfa;
-  margin: 1.5rem;
-  align-content: center;
-  font-family: 'Viga', sans-serif;
-}
-
 /* card workouts */
 
 .heading {
@@ -118,7 +97,7 @@ section {
 }
 
 .card {
-  width: 30rem;
+  width: 25rem;
   background-color: #c7d9eef9;
   display: flex;
   flex-direction: column;
@@ -126,7 +105,7 @@ section {
   justify-content: center;
   margin: 2rem;
   border-radius: 0 0 2rem 2rem;
-  box-shadow: 1.5rem 1.5rem 3rem rgba(0, 0, 0, 0.2);
+  box-shadow: .2rem .2rem .5rem rgba(0, 0, 0, 0.1);
 }
 
 .card .card-img {
@@ -147,11 +126,14 @@ section {
   border: 1rem solid #c7d9eef9;
 }
 
-.card h1 {
-  font-size: 2.5rem;
-  color: #6bbdfa;
-  margin: .9rem;
+.card h3 {
+  font-size: 1.5rem;
   font-family: 'Viga', sans-serif;
+}
+
+.card p {
+  font-size: 1.2rem;
+  padding: 1rem;
 }
 
 .team {
@@ -170,15 +152,13 @@ section {
 }
 
 .about {
-  font-size: 1.3rem;
-  margin: 1.5rem 0;
   text-align: center;
-  color: #ffffff;
-  font-weight: 250;
+  font-weight: 300;
+
 }
 
 .card .btn {
-  padding: 0.8rem 2.5rem;
+  padding: 0.5rem 2rem;
   background-color: #6bbdfa;
   border-radius: 2rem;
   margin-bottom: 1rem;
