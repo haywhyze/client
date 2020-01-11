@@ -134,7 +134,7 @@ const StyledContainer = styled.section`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
 
   .content-container {
     display: flex;
@@ -157,7 +157,7 @@ const StyledContainer = styled.section`
     position: absolute;
     z-index: 1000;
     background: #0086c9;
-    height: 100vh;
+    min-height: 100vh;
   }
 
   .nav-items {
