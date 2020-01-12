@@ -30,6 +30,14 @@ const About = () => {
       github: "haywhyze"
     },
     {
+      name: "Tigran Asriyan",
+      title: "Full Stack Developer",
+      twitter: "",
+      image: tigran,
+      linkedin: "tigranasriyan",
+      github: "hyetigran"
+    },
+    {
       name: "Remi Becheru",
       title: "Full Stack Developer",
       twitter: "RemiBecheru",
@@ -44,14 +52,6 @@ const About = () => {
       image: matt,
       linkedin: "matthewlocklin",
       github: "Lockers"
-    },
-    {
-      name: "Tigran Asriyan",
-      title: "Full Stack Developer",
-      twitter: "",
-      image: tigran,
-      linkedin: "tigranasriyan",
-      github: "hyetigran"
     },
     {
       name: "Shaun Carmody",
