@@ -10,14 +10,14 @@ import Text from "antd/lib/typography/Text";
 const LandingPage = () => {
   // use a hook for fetch stuffmaybe videos from our API
   return (
-    <Row
-      style={{ minHeight: "calc(100vh - 5rem)", margin: "0 5rem" }}
+    <StyledRow
+      style={{}}
       type="flex"
       justify="space-around"
       align="middle"
       gutter={16}
     >
-      <Col span={10}>
+      <Col sm={10}>
         <StyledCol>
           <StyledHeading1>
             <img alt="befit logo" src={logo} />
@@ -36,7 +36,7 @@ const LandingPage = () => {
           </div>
         </StyledCol>
       </Col>
-      <Col type="flex" justify="space-around" align="middle" span={10}>
+      <Col type="flex" justify="space-around" align="middle" sm={10}>
         <Carousel autoplay autoplaySpeed={5000}>
           <Card
             hoverable
@@ -61,10 +61,30 @@ const LandingPage = () => {
           </Card>
         </Carousel>
       </Col>
-    </Row>
+    </StyledRow>
   );
 };
 export default LandingPage;
+
+const StyledRow = styled(Row)`
+  min-height: calc(100vh - 5rem);
+  margin: "0 5rem";
+
+  .ant-col {
+    max-width: 100%;
+
+    @media screen and (max-width: 750px) {
+      padding: 2rem !important;
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    margin-top: 3rem;
+  }
+`;
 
 const StyledHeading1 = styled.h1`
   display: flex;
@@ -75,6 +95,15 @@ const StyledHeading1 = styled.h1`
   img {
     width: 6rem;
     margin-right: 1rem;
+
+    @media screen and (max-width: 750px) {
+      width: 4rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    font-size: 3rem;
   }
 `;
 
@@ -86,7 +115,11 @@ const StyledCol = styled.div`
   text-align: center;
 
   .ant-typography {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: -0.5rem 0 1rem 0;
+
+    @media screen and (max-width: 750px) {
+      font-size: 1rem;
+    }
   }
 `;

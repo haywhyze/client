@@ -34,7 +34,7 @@ const StyledNav = styled.nav`
   z-index: +10;
   justify-content: space-between;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 750px) {
     margin: 0;
   }
 `;
