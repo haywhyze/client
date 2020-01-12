@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.css";
 import { Layout } from "antd";
 import Auth from "../../auth/auth";
 import styled from "styled-components";
@@ -7,13 +6,11 @@ import styled from "styled-components";
 const { Header, Content, Sider, Footer } = Layout;
 
 class MainLayout extends React.Component {
-
-
   render() {
     return (
       <StyledContainer>
         {!Auth.isAuthenticated() ? (
-          <Header style={{ backgroundColor: "#0086c9" }}>
+          <Header style={{ position: "fixed", zIndex: 10, width: "100%" }}>
             {this.props.header}
           </Header>
         ) : (
@@ -32,10 +29,10 @@ class MainLayout extends React.Component {
           <Content>
             {this.props.routes}
             {this.props.location.pathname === "/workouts/new/add_exercises" ||
-             this.props.location.pathname === "/login" ||
-             this.props.location.pathname === "/signup" ||
-             this.props.location.pathname === "/" ||
-             this.props.location.pathname === "/about" ? (
+            this.props.location.pathname === "/login" ||
+            this.props.location.pathname === "/signup" ||
+            this.props.location.pathname === "/" ||
+            this.props.location.pathname === "/about" ? (
               ""
             ) : (
               <Footer>
@@ -52,30 +49,32 @@ class MainLayout extends React.Component {
                       If you can make it that far,<br></br> what's stopping you
                       from one more mile or one more set of reps?
                     </p>
-                  </div> 
-                  <div className='team-wrapper'>
-                  <h4 style={{textAlign:'center'}}>The team behind</h4>
-                  <div className='team'> 
-                    <div className='team-right'>
-                    <a href="https://github.com/benjamingrabow ">
-                        Benjamin Grabow FS
-                      </a>
-                      <a href="https://github.com/hyetigran">
-                        Tigran Asriyan FS
-                      </a>
-                      <a href="https://github.com/Becheru888">
-                        Remi Becheru FS
-                      </a>                     
-                      <a>Matt Locklin FS</a>
+                  </div>
+                  <div className="team-wrapper">
+                    <h4 style={{ textAlign: "center" }}>The team behind</h4>
+                    <div className="team">
+                      <div className="team-right">
+                        <a href="https://github.com/benjamingrabow ">
+                          Benjamin Grabow FS
+                        </a>
+                        <a href="https://github.com/hyetigran">
+                          Tigran Asriyan FS
+                        </a>
+                        <a href="https://github.com/Becheru888">
+                          Remi Becheru FS
+                        </a>
+                        <a>Matt Locklin FS</a>
+                      </div>
+                      <div className="team-left">
+                        <a>Yusuf Abdulkarim FS</a>
+                        <a>Kelechi Ogbonna FS</a>
+                        <a>Talent Antonio FS</a>
+                        <a>Wasiu Idowu FS</a>
+                      </div>
                     </div>
-                    <div className='team-left'>
-                      <a>Yusuf Abdulkarim FS</a>
-                      <a>Kelechi Ogbonna FS</a>
-                      <a>Talent Antonio FS</a>
-                      <a>Wasiu Idowu FS</a>
+                    <div style={{ textAlign: "center" }}>
+                      TEAM LEADER <a>Shaun Carmody</a>
                     </div>
-                    </div>
-                    <div style={{textAlign:'center'}}>TEAM LEADER <a>Shaun Carmody</a></div>
                   </div>
                 </FooterContent>
                 <Copy>
@@ -95,34 +94,32 @@ class MainLayout extends React.Component {
 }
 
 const Copy = styled.div`
-
   p {
-    position:relative;
-    bottom:20px;
+    position: relative;
+    bottom: 20px;
     text-align: center;
     padding: 0;
   }
 `;
 
 const FooterContent = styled.div`
-
-.team {
-  display:flex;
-  font-size:1rem;
-}
+  .team {
+    display: flex;
+    font-size: 1rem;
+  }
   .team-right {
-    width:150px;
-    display:flex;
-    flex-direction:column;
-    text-align:left;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
   }
 
   .team-left {
-    width:150px;
-    display:flex;
-    flex-direction:column;
-    border-left:1px solid gray;
-    text-align:right;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid gray;
+    text-align: right;
   }
 
   p {
@@ -134,12 +131,21 @@ const StyledContainer = styled.section`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
 
   .content-container {
     display: flex;
     flex-direction: row;
     overflow: hidden;
+  }
+
+  .ant-layout-header {
+    @media screen and (max-width: 800px) {
+      padding: 0 2rem;
+    }
+    @media screen and (max-width: 500px) {
+      padding: 0 1rem;
+    }
   }
 
   .ant-layout-sider-children {
@@ -157,7 +163,7 @@ const StyledContainer = styled.section`
     position: absolute;
     z-index: 1000;
     background: #0086c9;
-    height: 100vh;
+    min-height: 100vh;
   }
 
   .nav-items {
