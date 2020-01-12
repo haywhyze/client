@@ -1,280 +1,207 @@
-import React from 'react';
-import './AboutUs.css';
-import gym from '../../assets/avatar/gym.gif';
-import tale from '../../assets/avatar/tale.jpg';
-import kelechi from '../../assets/avatar/kelechi.jpg';
-import sean from '../../assets/avatar/sean.jpg';
-import tigran from '../../assets/avatar/tigran.jpg';
-import matt from '../../assets/avatar/matt.jpg';
-import wasiu from '../../assets/avatar/wasiu.jpg';
-import yusuf from '../../assets/avatar/yusuf.jpg';
-import benjamin from '../../assets/avatar/benjamin.jpg';
-import remi from '../../assets/avatar/remi.jpg';
-
+import React from "react";
+import styled from "styled-components";
+import tale from "../../assets/avatar/tale.jpg";
+import kelechi from "../../assets/avatar/kelechi.jpg";
+import sean from "../../assets/avatar/sean.jpg";
+import tigran from "../../assets/avatar/tigran.jpg";
+import matt from "../../assets/avatar/matt.jpg";
+import wasiu from "../../assets/avatar/wasiu.jpg";
+import yusuf from "../../assets/avatar/yusuf.jpeg";
+import benjamin from "../../assets/avatar/benjamin.jpg";
+import remi from "../../assets/avatar/remi.jpg";
+import { Card, Icon } from "antd";
 
 const About = () => {
+  const team = [
+    {
+      name: "Benjamin Grabow",
+      title: "Full Stack Developer",
+      twitter: "GrabowBenjamin",
+      image: benjamin,
+      linkedin: "benjamin-grabow",
+      github: "BenjaminGrabow"
+    },
+    {
+      name: "Yusuf Abdulkarim",
+      title: "Full Stack Developer",
+      twitter: "Haywhyze",
+      image: yusuf,
+      linkedin: "yusufayo",
+      github: "haywhyze"
+    },
+    {
+      name: "Remi Becheru",
+      title: "Full Stack Developer",
+      twitter: "RemiBecheru",
+      image: remi,
+      linkedin: "remi-becheru-870495150",
+      github: "Becheru888"
+    },
+    {
+      name: "Matthew Locklin",
+      title: "Full Stack Developer",
+      twitter: "MatthewLocklin6",
+      image: matt,
+      linkedin: "matthewlocklin",
+      github: "Lockers"
+    },
+    {
+      name: "Tigran Asriyan",
+      title: "Full Stack Developer",
+      twitter: "",
+      image: tigran,
+      linkedin: "tigranasriyan",
+      github: "hyetigran"
+    },
+    {
+      name: "Shaun Carmody",
+      title: "Team Lead",
+      image: sean,
+      twitter: "shaunmcarmody",
+      linkedin: "shaunmcarmody",
+      github: "shaunmcarmody"
+    },
+    {
+      name: "Kelechi Ogbonna",
+      title: "Front End Developer",
+      twitter: "",
+      image: kelechi,
+      linkedin: "kelechi-ogbonna",
+      github: "Kellswork"
+    },
+    {
+      name: "Antonio Talent",
+      title: "Front End Developer",
+      twitter: "",
+      image: tale,
+      linkedin: "talentantonio-fsse/",
+      github: "sampler36"
+    },
+    {
+      name: "Wasiu Idowu",
+      title: "Back End Developer",
+      twitter: "Hoxtygen",
+      image: wasiu,
+      linkedin: "wasiu-idowu",
+      github: "Hoxtygen"
+    }
+  ];
   return (
     <>
-      <section >
-        <div className="container">
-        <h1 className="team">Meet The Team</h1>
-          <div className="card-wrapper">
-            <div className="card">
-              <img src={gym} alt="card background" className="card-img" />
-              <img src={tale} alt="profile" className="profile-img" />
-              <h1>Antonio Talent</h1>
-              <p className="job-title">Full Stack Developer</p>
-              {/* <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p> */}
-              <a href="htt" className="btn">
-                Contact
-              </a>
-              <ul className="social-media">
-                {/* <li className="social-media">
-                <a href="https://codepen.io/"><i className="fab fa-codepen"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.twitter.com"><i className="fab fa-twitter-square"></i></a>
-                </li> */}
-                <li className="social-media">
-                  <a href="https://github.com/sampler36"><i className="fab fa-github-square"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.linkedin.com/in/talentantonio-fsse/"><i className="fab fa-linkedin"></i></a>
-                </li>               
-              </ul>
-            </div>
-            {/* card 2 yusuf */}
-            <div className="card">
-              <img src={gym} alt="card background" className="card-img" />
-              <img src={yusuf} alt="profile" className="profile-img" />
-              <h1>Yusuf Abdulkarim</h1>
-              <p className="job-title">Full Stack Developer</p>
-              {/* <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p> */}
-              <a href="htt" className="btn">
-                Contact
-              </a>
-              <ul className="social-media">
-                {/* <li className="social-media">
-                <a href="https://codepen.io/"><i className="fab fa-codepen"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.twitter.com"><i className="fab fa-twitter-square"></i></a>
-                </li> */}
-                <li className="social-media">
-                  <a href="https://github.com/haywhyze"><i className="fab fa-github-square"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.linkedin.com"><i className="fab fa-linkedin"></i></a>
-                </li>               
-              </ul>
-            </div>
-            {/* card 3 Remi */}
-            <div className="card">
-              <img src={gym} alt="card background" className="card-img" />
-              <img src={remi} alt="profile" className="profile-img" />
-              <h1>Remi Becheru</h1>
-              <p className="job-title">Full Stack Developer</p>
-              {/* <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p> */}
-              <a href="http" className="btn">
-                Contact
-              </a>
-              <ul className="social-media">
-                {/* <li className="social-media">
-                <a href="https://codepen.io/"><i className="fab fa-codepen"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.twitter.com"><i className="fab fa-twitter-square"></i></a>
-                </li> */}
-                <li className="social-media">
-                  <a href="https://github.com/Becheru888"><i className="fab fa-github-square"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.linkedin.com"><i className="fab fa-linkedin"></i></a>
-                </li>               
-              </ul>
-            </div>
-            {/* card 4 Kelechi */}
-            <div className="card">
-              <img src={gym} alt="card background" className="card-img" />
-              <img src={kelechi} alt="profile" className="profile-img" />
-              <h1>Kelechi Ogbonna</h1>
-              <p className="job-title">Full Stack Developer</p>
-              {/* <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p> */}
-              <a href="htt" className="btn">
-                Contact
-              </a>
-              <ul className="social-media">
-                {/* <li className="social-media">
-                <a href="https://codepen.io/"><i className="fab fa-codepen"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.twitter.com"><i className="fab fa-twitter-square"></i></a>
-                </li> */}
-                <li className="social-media">
-                  <a href="https://github.com/Kellswork"><i className="fab fa-github-square"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.linkedin.com"><i className="fab fa-linkedin"></i></a>
-                </li>               
-              </ul>             
-            </div>
-            {/* card 5 benjamin */}
-            <div className="card">
-              <img src={gym} alt="card background" className="card-img" />
-              <img src={benjamin} alt="profile" className="profile-img" />
-              <h1>Benjamin Grabow</h1>
-              <p className="job-title">Full Stack Developer</p>
-              {/* <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p> */}
-              <a href="http" className="btn">
-                Contact
-              </a>
-              <ul className="social-media">
-                {/* <li className="social-media"> */}
-                {/* <a href="https://codepen.io/"><i className="fab fa-codepen"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.twitter.com"><i className="fab fa-twitter-square"></i></a>
-                </li> */}
-                <li className="social-media">
-                  <a href="https://github.com/BenjaminGrabow"><i className="fab fa-github-square"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.linkedin.com"><i className="fab fa-linkedin"></i></a>
-                </li>               
-              </ul>
-            </div>
-            {/* card 6 matts */}
-            <div className="card">
-              <img src={gym} alt="card background" className="card-img" />
-              <img src={matt} alt="profile" className="profile-img" />
-              <h1>Matthew Locklin</h1>
-              <p className="job-title">Full Stack Developer</p>
-              {/* <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p> */}
-              <a href="http" className="btn">
-                Contact
-              </a>
-              <ul className="social-media">
-                {/* <li className="social-media"> */}
-                {/* <a href="https://codepen.io/"><i className="fab fa-codepen"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.twitter.com"><i className="fab fa-twitter-square"></i></a>
-                </li> */}
-                <li className="social-media">
-                  <a href="https://github.com/Lockers"><i className="fab fa-github-square"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.linkedin.com"><i className="fab fa-linkedin"></i></a>
-                </li>               
-              </ul>
-            </div>
-            {/*  card 7 wasui card */}
-            <div className="card">
-              <img src={gym} alt="card background" className="card-img" />
-              <img src={wasiu} alt="profile" className="profile-img" />
-              <h1>Wasiu Idowu</h1>
-              <p className="job-title">Full Stack Developer</p>
-              {/* <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p> */}
-              <a href="http" className="btn">
-                Contact
-              </a>
-              <ul className="social-media">
-                {/* <li className="social-media">
-                <a href="https://codepen.io/"><i className="fab fa-codepen"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.twitter.com"><i className="fab fa-twitter-square"></i></a>
-                </li> */}
-                <li className="social-media">
-                  <a href="https://github.com/Hoxtygen"><i className="fab fa-github-square"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="htthttps://www.linkedin.com/"><i className="fab fa-linkedin"></i></a>
-                </li>               
-              </ul>
-            </div>
-            {/* card seven tigran */}
-            <div className="card">
-              <img src={gym} alt="card background" className="card-img" />
-              <img src={tigran} alt="profile" className="profile-img" />
-              <h1>Tigran Asriyan </h1>
-              <p className="job-title">Full Stack Developer</p>
-              {/* <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p> */}
-              <a href="http" className="btn">
-                Contact
-              </a>
-              <ul className="social-media">
-                {/* <li className="social-media">
-                <a href="https://codepen.io/"><i className="fab fa-codepen"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.twitter.com"><i className="fab fa-twitter-square"></i></a>
-                </li> */}
-                <li className="social-media">
-                  <a href="https://github.com/hyetigran"><i className="fab fa-github-square"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.linkedin.com/in/tigranasriyan/"><i className="fab fa-linkedin"></i></a>
-                </li>               
-              </ul>
-            </div>
-            {/* card 8  Sean*/}
-            <div className="card">
-              <img src={gym} alt="card background" className="card-img" />
-              <img src={sean} alt="profile" className="profile-img" />
-              <h1>Shaun Carmody</h1>
-              <p className="job-title">Team Lead</p>
-              {/* <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p> */}
-              <a href="http" className="btn">
-                Contact
-              </a>
-              <ul className="social-media">
-                {/* <li className="social-media">
-                <a href="https://codepen.io/"><i className="fab fa-codepen"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.twitter.com"><i className="fab fa-twitter-square"></i></a>
-                </li> */}
-                <li className="social-media">
-                  <a href="https://github.com/shaunmcarmody"><i className="fab fa-github-square"></i></a>
-                </li>
-                <li className="social-media">
-                  <a href="https://www.linkedin.com/in/shaunmcarmody/"><i className="fab fa-linkedin"></i></a>
-                </li>               
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AboutSection>
+        <h1>Meet The Team</h1>
+        <CardWrapper>
+          {team.map(member => (
+            <Card
+              hoverable
+              key={member.name}
+              title={member.name}
+              cover={<img alt={member.name} src={member.image} />}
+              actions={[
+                <a href={`https://www.linkedin.com/in/${member.linkedin}`}>
+                  <Icon type="linkedin" key="linkedin" />
+                </a>,
+                <a href={`https://www.twitter.com/${member.twitter}`}>
+                  <Icon type="twitter" key="twitter" />
+                </a>,
+                <a href={`https://github.com/sampler36/${member.github}`}>
+                  <Icon type="github" key="github" />
+                </a>
+              ]}
+            >
+              <Card.Meta description={member.title} />
+            </Card>
+          ))}
+        </CardWrapper>
+      </AboutSection>
     </>
   );
 };
 
 export default About;
+
+const AboutSection = styled.div`
+  margin: 5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 5rem);
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-family: "Viga", sans-serif;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 5rem 3rem;
+  }
+  @media screen and (max-width: 560px) {
+    margin: 5rem 1rem;
+  }
+`;
+
+const CardWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  .ant-card-head {
+    background: #1890ff;
+    color: #fff;
+  }
+
+  .ant-card-cover img {
+    object-fit: cover;
+    width: 100%;
+    height: 298px;
+  }
+
+  .ant-card-body {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    background: rgb(0, 20, 41);
+    z-index: 45;
+
+    h3 {
+      margin-top: 1rem;
+    }
+
+    .ant-card-meta-description {
+      color: white;
+    }
+  }
+
+  .ant-card-actions {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+
+  .ant-card-bordered {
+    height: calc(100% - 1rem);
+    margin-bottom: 1.5rem;
+    position: relative;
+    width: 300px;
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ant-card-bordered {
+      height: calc(100% - 1rem);
+      width: 45vw;
+      margin-bottom: 16px;
+      position: relative;
+    }
+  }
+  @media screen and (max-width: 560px) {
+    .ant-card-bordered {
+      height: calc(100% - 1rem);
+      width: 70vw;
+      margin-bottom: 16px;
+      position: relative;
+    }
+  }
+`;
