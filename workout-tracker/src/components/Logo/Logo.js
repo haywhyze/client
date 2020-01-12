@@ -12,10 +12,10 @@ const logo = () => (
 export default logo;
 
 const StyledLogo = styled(NavLink)`
-    padding: 0 .3rem;
-    &:hover {
-        transform: scale(1.1);
-        transition: .2s all;
-        background: rgba(222,222,222,0.01);
-    }
-`
+  padding: 0 0.3rem;
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.2s all;
+    background: rgba(222, 222, 222, 0.01);
+  }
+`;
