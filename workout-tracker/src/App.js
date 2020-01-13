@@ -17,7 +17,6 @@ import ProfileCard from "./components/MainNavBar/SideNavigation/ProfileCard";
 import "./App.css";
 import DashboardNavItem from "./components/MainNavBar/SideNavigation/DashboardNavItem";
 import WorkoutContainer from "./views/Workouts/WorkoutsContainer";
-import { Button, Menu } from "antd";
 import logo from "./assets/images/beFit-logo.png";
 import AllExercises from "./views/customWorkout/AllExercises";
 

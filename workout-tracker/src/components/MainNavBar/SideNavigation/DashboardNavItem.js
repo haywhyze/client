@@ -2,12 +2,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Icon, Menu, Button } from "antd";
 
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1394475_0d6q9r1xk5c.js',
+});
+
 const dashItems = [
   {
     id: "workouts",
     text: "Workouts",
     link: "/workouts",
-    icon: <i className="fas fa-dumbbell"></i>
+    icon: "dumbbell"
   },
   {
     id: "dashboard",
@@ -19,7 +23,7 @@ const dashItems = [
     id: "exercise",
     text: "Exercises",
     link: "/exercises",
-    icon: <i className="fas fa-list"></i>
+    icon: "LC_icon_list_line_21"
   },
   {
     id: "settings",
@@ -41,7 +45,7 @@ const DashboardNavItem = props => (
       {dashItems.map(item => (
         <Menu.Item key={item.id}>
           <NavLink to={item.link}>
-            <Icon type="user" />
+            <IconFont type={"icon-" + item.icon} />
             <span className="nav-text">{item.text}</span>
           </NavLink>
         </Menu.Item>
