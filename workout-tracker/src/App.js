@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import Settings from "./views/Settings/Settings";
 import ExercisesLibrary from "./views/ExerciseLibrary/ExercisesLibrary";
 import Stats from "./views/Stats/Stats";
@@ -13,11 +14,11 @@ import LoginPage from "./views/Auth/Login";
 import MainNavBar from "./components/MainNavBar/MainNavBar";
 import MainLayout from "./components/Layout/Layout";
 import ProfileCard from "./components/MainNavBar/SideNavigation/ProfileCard";
-import Logo from "./components/Logo/Logo";
 import "./App.css";
 import DashboardNavItem from "./components/MainNavBar/SideNavigation/DashboardNavItem";
 import WorkoutContainer from "./views/Workouts/WorkoutsContainer";
-import { Button } from "antd";
+import { Button, Menu } from "antd";
+import logo from "./assets/images/beFit-logo.png";
 import AllExercises from "./views/customWorkout/AllExercises";
 
 class App extends Component {
@@ -26,28 +27,18 @@ class App extends Component {
     showBackdrop: false
   };
 
-  logoutHandler = () => {
-    localStorage.removeItem("beFitToken");
-    localStorage.removeItem("userId");
-    this.props.history.replace("/login");
-  };
-
   render() {
     let sider = (
       <>
-        <div>
-          <Logo />
+        <div style={{ marginTop: "3rem" }}>
           <ProfileCard />
         </div>
-        <ul className="nav-items">
-          <DashboardNavItem isAuth={Auth.isAuthenticated()} />
-        </ul>
+        <DashboardNavItem isAuth={Auth.isAuthenticated()} />
         <div className="space" style={{ flex: 1 }}></div>
-        <div style={{ paddingLeft: "35px", marginBottom: "1rem" }}>
-          <Button type="danger" onClick={this.logoutHandler}>
-            Logout
-          </Button>
-        </div>
+        <StyledHeading1>
+          <img alt="befit logo" src={logo} />
+          <span>BeFit</span>
+        </StyledHeading1>
       </>
     );
     let routes = (
@@ -102,3 +93,31 @@ class App extends Component {
 }
 
 export default withRouter(App);
+
+const StyledHeading1 = styled.h1`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: #fff;
+  font-family: "Viga", sans-serif;
+
+  span {
+    display: block;
+  }
+
+  img {
+    width: 5rem;
+    /* margin-right: 1rem; */
+
+    @media screen and (max-width: 750px) {
+      width: 3rem;
+      /* margin-right: 0.5rem; */
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    font-size: 2rem;
+  }
+`;

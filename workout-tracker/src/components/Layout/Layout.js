@@ -67,7 +67,7 @@ const StyledContainer = styled.section`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-height: 100vh;
+  height: 100vh;
 
   .content-container {
     display: flex;
@@ -97,8 +97,8 @@ const StyledContainer = styled.section`
 
   .ant-layout-sider {
     position: absolute;
-    z-index: 1000;
-    background: #0086c9;
+    z-index: 11;
+    /* background: #0086c9; */
     min-height: 100vh;
   }
 

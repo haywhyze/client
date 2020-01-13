@@ -1,49 +1,62 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Icon, Menu, Button } from "antd";
 
 const dashItems = [
-  {id: "workouts", text: 'Workouts', link: "/workouts", icon: <i className="fas fa-dumbbell"></i>},
-  {id: "dashboard", text: 'Dashboard', link: "/dashboard", icon: <i className="fas fa-chart-line"></i>},
-  {id: "exercise", text: 'Exercises', link: "/exercises", icon: <i className="fas fa-list"></i>},
-  {id: "settings", text: 'Settings', link: "/settings", icon: <i className="fas fa-cog"></i>},
-]
-const DashboardNavItem = (props) => [
-  ...dashItems.map(item => (
-    <StyledList
-    
-    key={item.id} >
-      <NavLink to={item.link}> {item.icon} </NavLink>  
-      <NavLink to={item.link}><span> {item.text} </span></NavLink>   
-    </StyledList>
-  )
-  )
-]
-
-const StyledList = styled.li`
-  display: flex;
-  word-spacing: 2em;
-  padding: 15px;
-  text-align: left;
-  font-size: 1.3rem;
-  color: #fff;
-
-  @media (max-width: 992px) {
-      padding: 5px 15px;
+  {
+    id: "workouts",
+    text: "Workouts",
+    link: "/workouts",
+    icon: <i className="fas fa-dumbbell"></i>
+  },
+  {
+    id: "dashboard",
+    text: "Dashboard",
+    link: "/dashboard",
+    icon: <i className="fas fa-chart-line"></i>
+  },
+  {
+    id: "exercise",
+    text: "Exercises",
+    link: "/exercises",
+    icon: <i className="fas fa-list"></i>
+  },
+  {
+    id: "settings",
+    text: "Settings",
+    link: "/settings",
+    icon: <i className="fas fa-cog"></i>
   }
-  a:last-of-type {
-    padding-left: 0.75rem;
-  }
+];
 
-  a,
-  a:hover {
-    color: white;
-    font-weight: bold;
-  }
+const logoutHandler = () => {
+  localStorage.removeItem("beFitToken");
+  localStorage.removeItem("userId");
+  this.props.history.replace("/login");
+};
 
-  a.active {
-    color: #5c0d91;
-  }
-`
+const DashboardNavItem = props => (
+  <>
+    <Menu theme="dark" mode="inline" defaultSelectedKeys={['workouts']}>
+      {dashItems.map(item => (
+        <Menu.Item key={item.id}>
+          <NavLink to={item.link}>
+            <Icon type="user" />
+            <span className="nav-text">{item.text}</span>
+          </NavLink>
+        </Menu.Item>
+      ))}
+      <div>
+        <Button
+          style={{ marginLeft: "24px" }}
+          onClick={logoutHandler}
+          type="danger"
+        >
+          Logout
+        </Button>
+      </div>
+    </Menu>
+  </>
+);
 
 export default DashboardNavItem;
