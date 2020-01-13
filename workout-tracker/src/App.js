@@ -27,7 +27,8 @@ class App extends Component {
   };
 
   logoutHandler = () => {
-    localStorage.clear();
+    localStorage.removeItem("beFitToken");
+    localStorage.removeItem("userId");
     this.props.history.replace("/login");
   };
 
