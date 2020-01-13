@@ -38,8 +38,9 @@ class MainLayout extends React.Component {
                   <p>
                     <span>© Copyright {new Date().getFullYear()}</span>
                     <br></br>
-                    Designed and built with all the love in the world by the
-                    core <Link to="/about">team</Link>. Code licensed{" "}
+                    Designed and built with ❤️ by the
+                     <Link to="/about"> team</Link>. 
+                     <br/>Code licensed{" "}
                     <a href="https://github.com/haywhyze/client/blob/master/LICENSE">
                       MIT
                     </a>
