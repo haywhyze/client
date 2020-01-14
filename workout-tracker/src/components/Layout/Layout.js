@@ -108,7 +108,6 @@ const StyledContainer = styled.section`
 
   @media (min-width: 992px) {
     .ant-layout-sider {
-      padding: 0.5rem;
       overflow: auto;
       position: relative;
     }

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Icon, Menu, Button } from "antd";
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1394475_0d6q9r1xk5c.js',
+  scriptUrl: "//at.alicdn.com/t/font_1394475_d8rn2jh47xo.js"
 });
 
 const dashItems = [
@@ -17,19 +17,19 @@ const dashItems = [
     id: "dashboard",
     text: "Dashboard",
     link: "/dashboard",
-    icon: <i className="fas fa-chart-line"></i>
+    icon: "icon_calendar"
   },
   {
-    id: "exercise",
+    id: "exercises",
     text: "Exercises",
     link: "/exercises",
-    icon: "LC_icon_list_line_21"
+    icon: "icon_workmore"
   },
   {
     id: "settings",
     text: "Settings",
     link: "/settings",
-    icon: <i className="fas fa-cog"></i>
+    icon: "icon_setting"
   }
 ];
 
@@ -41,9 +41,13 @@ const logoutHandler = () => {
 
 const DashboardNavItem = props => (
   <>
-    <Menu theme="dark" mode="inline" defaultSelectedKeys={['workouts']}>
+    <Menu
+      theme="dark"
+      mode="inline"
+      defaultSelectedKeys={[props.location.pathname.substring(1)]}
+    >
       {dashItems.map(item => (
-        <Menu.Item key={item.id}>
+        <Menu.Item style={{ fontSize: "16px" }} key={item.id}>
           <NavLink to={item.link}>
             <IconFont type={"icon-" + item.icon} />
             <span className="nav-text">{item.text}</span>
@@ -52,9 +56,16 @@ const DashboardNavItem = props => (
       ))}
       <div>
         <Button
-          style={{ marginLeft: "24px" }}
+          style={{
+            paddingLeft: "12px",
+            margin: "0 12px",
+            paddingRight: "12px",
+            textAlign: "left",
+            width: "calc(100% - 24px)"
+          }}
           onClick={logoutHandler}
           type="danger"
+          icon="logout"
         >
           Logout
         </Button>
