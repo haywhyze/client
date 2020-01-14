@@ -23,7 +23,7 @@ export const doLogIn = (user, history) => dispatch => {
     .then(response => {
       const { token, userId } = response.data;
       dispatch(genericAction(LOGIN, userId));
-      localStorage.setItem("token", token);
+      localStorage.setItem("beFitToken", token);
       localStorage.setItem("userId", userId);
       history.push("/workouts");
     })
@@ -41,7 +41,7 @@ export const doSignUp = (user, history) => dispatch => {
     .then(response => {
       const { token, user } = response.data;
       dispatch(genericAction(LOGIN, user.id));
-      localStorage.setItem("token", token);
+      localStorage.setItem("beFitToken", token);
       localStorage.setItem("userId", user.id);
       history.push("/workouts");
     })
@@ -53,7 +53,7 @@ export const doSignUp = (user, history) => dispatch => {
 };
 
 export const doLogOut = () => dispach => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("beFitToken");
   dispach(genericAction(LOGOUT));
 };
 
@@ -63,9 +63,10 @@ export const doGetUser = () => dispatch => {
     .get(`${appURL}/profile`)
     .then(response => {
       dispatch(genericAction(GET_USER, response.data));
+      dispatch(genericAction(LOADING_USER, false));
     })
-    .catch(error =>
-      dispatch(genericAction(USER_ERROR, error.response.data.errorMessage))
-    )
-    .finally(() => dispatch(genericAction(LOADING_USER, false)));
+    .catch(error => {
+      dispatch(genericAction(USER_ERROR, error.response.data.errorMessage));
+      dispatch(genericAction(LOADING_USER, false));
+    });
 };

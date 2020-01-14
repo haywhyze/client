@@ -38,8 +38,9 @@ class MainLayout extends React.Component {
                   <p>
                     <span>© Copyright {new Date().getFullYear()}</span>
                     <br></br>
-                    Designed and built with all the love in the world by the
-                    core <Link to="/about">team</Link>. Code licensed{" "}
+                    Designed and built with ❤️ by the
+                     <Link to="/about"> team</Link>. 
+                     <br/>Code licensed{" "}
                     <a href="https://github.com/haywhyze/client/blob/master/LICENSE">
                       MIT
                     </a>
@@ -66,7 +67,7 @@ const StyledContainer = styled.section`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-height: 100vh;
+  height: 100vh;
 
   .content-container {
     display: flex;
@@ -96,8 +97,8 @@ const StyledContainer = styled.section`
 
   .ant-layout-sider {
     position: absolute;
-    z-index: 1000;
-    background: #0086c9;
+    z-index: 11;
+    /* background: #0086c9; */
     min-height: 100vh;
   }
 
@@ -107,7 +108,6 @@ const StyledContainer = styled.section`
 
   @media (min-width: 992px) {
     .ant-layout-sider {
-      padding: 0.5rem;
       overflow: auto;
       position: relative;
     }
