@@ -87,7 +87,7 @@ class AllExercises extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchExercises();
+    if (!this.props.exercises) this.props.fetchExercises();
   }
 
   render() {

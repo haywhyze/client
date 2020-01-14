@@ -33,45 +33,46 @@ const dashItems = [
   }
 ];
 
-const logoutHandler = () => {
-  localStorage.removeItem("beFitToken");
-  localStorage.removeItem("userId");
-  this.props.history.replace("/login");
+const DashboardNavItem = props => {
+  const logoutHandler = () => {
+    localStorage.removeItem("beFitToken");
+    localStorage.removeItem("userId");
+    props.history.replace("/login");
+  };
+  return (
+    <>
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={[props.location.pathname.substring(1)]}
+      >
+        {dashItems.map(item => (
+          <Menu.Item style={{ fontSize: "16px" }} key={item.id}>
+            <NavLink to={item.link}>
+              <IconFont type={"icon-" + item.icon} />
+              <span className="nav-text">{item.text}</span>
+            </NavLink>
+          </Menu.Item>
+        ))}
+        <div>
+          <Button
+            style={{
+              paddingLeft: "12px",
+              margin: "0 12px",
+              paddingRight: "12px",
+              textAlign: "left",
+              width: "calc(100% - 24px)"
+            }}
+            onClick={logoutHandler}
+            type="danger"
+            icon="logout"
+          >
+            Logout
+          </Button>
+        </div>
+      </Menu>
+    </>
+  );
 };
-
-const DashboardNavItem = props => (
-  <>
-    <Menu
-      theme="dark"
-      mode="inline"
-      defaultSelectedKeys={[props.location.pathname.substring(1)]}
-    >
-      {dashItems.map(item => (
-        <Menu.Item style={{ fontSize: "16px" }} key={item.id}>
-          <NavLink to={item.link}>
-            <IconFont type={"icon-" + item.icon} />
-            <span className="nav-text">{item.text}</span>
-          </NavLink>
-        </Menu.Item>
-      ))}
-      <div>
-        <Button
-          style={{
-            paddingLeft: "12px",
-            margin: "0 12px",
-            paddingRight: "12px",
-            textAlign: "left",
-            width: "calc(100% - 24px)"
-          }}
-          onClick={logoutHandler}
-          type="danger"
-          icon="logout"
-        >
-          Logout
-        </Button>
-      </div>
-    </Menu>
-  </>
-);
 
 export default DashboardNavItem;

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import "antd/dist/antd.css";
-import { Avatar } from "antd";
+import { Avatar, Spin } from "antd";
 import { Link } from "react-router-dom";
 
 import { fetchSettings } from "../../../store/actions/settingActions";
@@ -16,22 +16,28 @@ class ProfileCard extends React.Component {
   render() {
     return (
       <StyledImage>
-        <div>
-          <Link to="/dashboard">
-            <Avatar size={64} icon="user" />
-            <p>
-              {this.props.settings &&
-                "Welcome, " + this.props.settings[0].username}
-            </p>
-          </Link>
-        </div>
-        <section>
-          <span>
-            {this.props.history
-              ? `You have completed a total of ${this.props.history.length} workouts`
-              : "No workout completeted yet"}
-          </span>
-        </section>
+        {this.props.settings ? (
+          <>
+            <div>
+              <Link to="/dashboard">
+                <Avatar size={64} icon="user" />
+                <p>
+                  {this.props.settings &&
+                    "Welcome, " + this.props.settings[0].username}
+                </p>
+              </Link>
+            </div>
+            <section>
+              <span>
+                {this.props.history
+                  ? `You have completed a total of ${this.props.history.length} workouts`
+                  : "No workout completeted yet"}
+              </span>
+            </section>
+          </>
+        ) : (
+          <Spin />
+        )}
       </StyledImage>
     );
   }

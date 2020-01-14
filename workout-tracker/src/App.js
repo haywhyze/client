@@ -32,7 +32,7 @@ class App extends Component {
         <div style={{ marginTop: "3rem" }}>
           <ProfileCard />
         </div>
-        <DashboardNavItem location={this.props.location} isAuth={Auth.isAuthenticated()} />
+        <DashboardNavItem isAuth={Auth.isAuthenticated()} {...this.props} />
         <div className="space" style={{ flex: 1 }}></div>
         <StyledHeading1>
           <img alt="befit logo" src={logo} />
