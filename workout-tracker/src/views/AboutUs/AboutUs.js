@@ -141,7 +141,7 @@ const AboutSection = styled.div`
   }
 `;
 
-const CardWrapper = styled.div`
+export const CardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
