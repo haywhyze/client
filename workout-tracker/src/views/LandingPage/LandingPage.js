@@ -67,7 +67,7 @@ const LandingPage = () => {
 export default LandingPage;
 
 const StyledRow = styled(Row)`
-  min-height: calc(100vh - 5rem);
+  height: 100%;
   margin: "0 5rem";
 
   .ant-col {

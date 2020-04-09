@@ -33,6 +33,8 @@ class MainLayout extends React.Component {
             this.props.location.pathname === "/signup" ||
             this.props.location.pathname === "/" ||
             this.props.location.pathname === "/about" ? (
+              <> 
+              <div className="space" style={{ flex: 1 }}></div>
               <Footer>
                 <Copy>
                   <p>
@@ -47,6 +49,7 @@ class MainLayout extends React.Component {
                   </p>
                 </Copy>
               </Footer>
+              </>
             ) : (
               ""
             )}
@@ -93,6 +96,8 @@ const StyledContainer = styled.section`
     min-height: 100vh;
     min-width: 0;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
   }
 
   .ant-layout-sider {

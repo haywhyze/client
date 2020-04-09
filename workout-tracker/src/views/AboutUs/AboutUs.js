@@ -125,7 +125,6 @@ const AboutSection = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 5rem);
   justify-content: center;
   align-items: center;
 
