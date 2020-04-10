@@ -8,6 +8,7 @@ const initialState = {
   myWorkouts: null,
   newWorkout: null,
   loading: null,
+  loadingWorkoutDetail: null,
   error: null,
   currentWorkout: null,
 };
@@ -45,20 +46,34 @@ const workouts = (state = initialState, action) => {
     case type.FETCH_WORKOUTS:
       return {
         ...state,
-        workouts: action.workouts,
+        loading: action.payload,
+        error: "",
+      };
+    case type.FETCH_WORKOUTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        workouts: action.payload,
+        error: "",
+      };
+    case type.FETCH_WORKOUTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
 
     case type.FETCH_WORKOUT_DETAILS:
       return {
         ...state,
-        loading: action.payload,
+        loadingWorkoutDetail: action.payload,
         error: "",
       };
 
     case type.FETCH_WORKOUT_DETAILS_SUCCCESS:
       return {
         ...state,
-        loading: false,
+        loadingWorkoutDetail: false,
         currentWorkout: action.payload,
         error: "",
       };
@@ -66,7 +81,7 @@ const workouts = (state = initialState, action) => {
     case type.FETCH_WORKOUT_DETAILS_FAILURE:
       return {
         ...state,
-        loading: false,
+        loadingWorkoutDetail: false,
         error: action.payload,
       };
 

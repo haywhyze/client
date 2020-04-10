@@ -1,22 +1,33 @@
 import { axiosWithAuth } from "../axiosWithAuth";
-// import axiosWithAuth from 'axios';
-// actions
+
 export const FETCH_WORKOUTS = "FETCH_WORKOUTS";
+export const FETCH_WORKOUTS_SUCCESS = "FETCH_WORKOUTS_SUCCESS";
+export const FETCH_WORKOUTS_FAILURE = "FETCH_WORKOUTS_FAILURE";
+
 export const FETCH_WORKOUT_DETAILS = "FETCH_WORKOUT_DETAILS";
 export const FETCH_WORKOUT_DETAILS_SUCCCESS = "FETCH_WORKOUT_DETAILS_SUCCCESS";
 export const FETCH_WORKOUT_DETAILS_FAILURE = "FETCH_WORKOUT_DETAILS_FAILURE";
+
 export const START_WORKOUT = "START_WORKOUT";
+
 export const CHOOSE_EXERCISE = "CHOOSE_EXERCISE";
+
 export const FINISH_EXERCISE = "FINISH_EXERCISE";
+
 export const END_WORKOUT = "END_WORKOUT";
+
 export const DELETE_WORKOUT = "DELETE_WORKOUT";
+
 export const CREATE_WORKOUT = "CREATE_WORKOUT";
 export const LOADING_CREATE_WORKOUT = "LOADING_CREATE_WORKOUT";
 export const CREATE_WORKOUT_ERROR = "CREATE_WORKOUT_ERROR";
+
 export const ADD_WORKOUT = "ADD_WORKOUT";
-export const ADD_WORKOUT_DETAILS = "ADD_WORKOUT_DETAILS";
 export const ADD_WORKOUT_SUCCESS = "ADD_WORKOUT_SUCCESS";
 export const ADD_WORKOUT_FAILURE = "ADD_WORKOUT_FAILURE";
+
+export const ADD_WORKOUT_DETAILS = "ADD_WORKOUT_DETAILS";
+
 export const GET_SAVED_WORKOUT = "GET_SAVED_WORKOUT";
 export const GET_SAVED_WORKOUT_SUCCESS = "GET_SAVED_WORKOUT_SUCCESS";
 export const GET_SAVED_WORKOUT_FAILURE = "GET_SAVED_WORKOUT_FAILURE";
@@ -60,14 +71,20 @@ export const createWorkout = (fullWorkoutDetails, history) => dispatch => {
 
 // action dispatcher
 export const fetchWorkouts = () => dispatch => {
-  // type LOADING needs to be added (also for the redux state)
+  dispatch({
+    type: FETCH_WORKOUTS,
+    payload: true
+  });
   axiosWithAuth()
     .get(workouts)
     .then(res => {
-      dispatch({ type: FETCH_WORKOUTS, workouts: res.data });
+      dispatch({ type: FETCH_WORKOUTS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      // type ERROR needs to be added (also for the redux state)
+      dispatch({
+        type: FETCH_WORKOUTS_FAILURE,
+        payload: err.response.data.errorMessage
+      });
     });
 };
 

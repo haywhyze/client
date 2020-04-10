@@ -5,7 +5,7 @@ import {
   fetchWorkoutDetails,
   saveWorkout,
 } from "../../store/actions/workoutsActions";
-import { notification, Empty } from "antd";
+import { notification, Empty, Spin } from "antd";
 
 import WorkoutCard from "../../components/WorkoutCard/WorkoutCard";
 import { CardWrapper } from "../AboutUs/AboutUs";
@@ -30,12 +30,30 @@ class Workouts extends React.Component {
   };
 
   render() {
+    const {
+      loading,
+      workouts,
+      allExercises,
+      currentWorkout,
+      error,
+      deleteWorkout,
+      fetchWorkoutDetails,
+      loadingWorkoutDetail,
+    } = this.props;
+
+    if (loading) {
+      return (
+        <div style={{ textAlign: "center" }}>
+          <Spin tip="Loading Workouts..." size="large" />
+        </div>
+      );
+    }
     return (
       <>
-        {this.props.workouts ? (
+        {workouts ? (
           <>
             <CardWrapper>
-              {this.props.workouts.map((workout) => {
+              {workouts.map((workout) => {
                 return (
                   <WorkoutCard
                     key={workout.id}
@@ -43,15 +61,13 @@ class Workouts extends React.Component {
                       workout.image_url ||
                       "https://www.bodybuilding.com/images/2018/april/5-workous-that-are-insanely-efficient-at-torching-fat-signature-3-700xh.jpg"
                     }
-                    fetchDetails={this.props.fetchWorkoutDetails}
+                    fetchDetails={fetchWorkoutDetails}
                     name={workout.workout_name}
                     description={workout.workout_description}
                     difficulty={workout.level}
                     id={workout.id}
-                    startWorkout={() =>
-                      this.props.fetchWorkoutDetails(workout.id)
-                    }
-                    deleteWorkout={() => this.props.deleteWorkout(workout.id)}
+                    startWorkout={() => fetchWorkoutDetails(workout.id)}
+                    deleteWorkout={() => deleteWorkout(workout.id)}
                     addWorkout={() =>
                       this.addWorkout(
                         "success",
@@ -60,10 +76,10 @@ class Workouts extends React.Component {
                       )
                     }
                     myWorkout={false}
-                    exercises={this.props.allExercises}
-                    currentWorkout={this.props.currentWorkout}
-                    loading={this.props.loading}
-                    error={this.props.error}
+                    exercises={allExercises}
+                    currentWorkout={currentWorkout}
+                    loading={loadingWorkoutDetail}
+                    error={error}
                   />
                 );
               })}
@@ -85,6 +101,7 @@ const mapStateToProps = (state) => {
     workouts: state.workouts.workouts,
     allExercises: state.workouts.allExercises,
     currentWorkout: state.workouts.currentWorkout,
+    loadingWorkoutDetail: state.workouts.loadingWorkoutDetail,
     loading: state.workouts.loading,
     error: state.workouts.error,
   };

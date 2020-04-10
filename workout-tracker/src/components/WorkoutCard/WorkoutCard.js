@@ -85,17 +85,20 @@ class WorkoutCard extends React.Component {
                 <Spin tip="Loading Exercices..." size="large" />
               </div>
             ) : (
-              <div>
-                <List
-                  size="small"
-                  header={<h3>Exercises</h3>}
-                  bordered
-                  dataSource={this.props.currentWorkout.exercises}
-                  renderItem={(item) => (
-                    <List.Item>{item.exercise_name}</List.Item>
-                  )}
-                />
-              </div>
+              this.props.currentWorkout &&
+              this.props.currentWorkout.exercises && (
+                <div>
+                  <List
+                    size="small"
+                    header={<h3>Exercises</h3>}
+                    bordered
+                    dataSource={this.props.currentWorkout.exercises}
+                    renderItem={(item) => (
+                      <List.Item>{item.exercise_name}</List.Item>
+                    )}
+                  />
+                </div>
+              )
             )}
           </div>
         </Modal>
