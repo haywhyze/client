@@ -3,6 +3,8 @@ import { axiosWithAuth } from "../axiosWithAuth";
 // actions
 export const FETCH_WORKOUTS = "FETCH_WORKOUTS";
 export const FETCH_WORKOUT_DETAILS = "FETCH_WORKOUT_DETAILS";
+export const FETCH_WORKOUT_DETAILS_SUCCCESS = "FETCH_WORKOUT_DETAILS_SUCCCESS";
+export const FETCH_WORKOUT_DETAILS_FAILURE = "FETCH_WORKOUT_DETAILS_FAILURE";
 export const START_WORKOUT = "START_WORKOUT";
 export const CHOOSE_EXERCISE = "CHOOSE_EXERCISE";
 export const FINISH_EXERCISE = "FINISH_EXERCISE";
@@ -70,25 +72,23 @@ export const fetchWorkouts = () => dispatch => {
 };
 
 export const fetchWorkoutDetails = (workout_id) => dispatch => {
-  // type LOADING needs to be added (also for the redux state)
-
+  dispatch({
+    type: FETCH_WORKOUT_DETAILS,
+    payload: true
+  });
   axiosWithAuth()
     .get(`${workouts}/${workout_id}`)
     .then(res => {
       dispatch({
-        type: FETCH_WORKOUT_DETAILS,
-        workoutDetails: res.data.data,
-        workout_id: workout_id
+        type: FETCH_WORKOUT_DETAILS_SUCCCESS,
+        payload: res.data.data,
       });
-
-      return axiosWithAuth()
-        .post(`${workouts}/${workout_id}/start`)
-        .then(res => {
-          dispatch({ type: START_WORKOUT });
-        });
     })
     .catch(err => {
-      // type ERROR needs to be added (also for the redux state)
+      dispatch({
+        type: FETCH_WORKOUT_DETAILS_FAILURE,
+        payload: err.response.data.errorMessage
+      });
     });
 };
 

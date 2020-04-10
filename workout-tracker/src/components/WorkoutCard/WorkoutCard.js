@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Modal, Card, Col, Icon, List, Tooltip } from "antd";
+import { Spin, Modal, Card, Col, Icon, List, Tooltip } from "antd";
 
 const { Meta } = Card;
 
@@ -8,22 +8,21 @@ class WorkoutCard extends React.Component {
   state = { visible: false };
 
   showModal = () => {
+    this.props.fetchDetails(this.props.id);
     this.setState({
-      visible: true
+      visible: true,
     });
   };
 
-  handleOk = e => {
-    console.log(e);
+  handleOk = (e) => {
     this.setState({
-      visible: false
+      visible: false,
     });
   };
 
-  handleCancel = e => {
-    console.log(e);
+  handleCancel = (e) => {
     this.setState({
-      visible: false
+      visible: false,
     });
   };
 
@@ -64,7 +63,7 @@ class WorkoutCard extends React.Component {
               ),
               <Tooltip placement="bottom" title="More info">
                 <Icon type="info-circle" onClick={this.showModal} />
-              </Tooltip>
+              </Tooltip>,
             ]}
           >
             <Meta description={this.props.description} />
@@ -81,29 +80,23 @@ class WorkoutCard extends React.Component {
             <p>{this.props.description}</p>
           </div>
           <div>
-            {console.log(this.props)}
-            {this.props.exercises ? (
+            {this.props.loading ? (
+              <div style={{ textAlign: "center" }}>
+                <Spin tip="Loading Exercices..." size="large" />
+              </div>
+            ) : (
               <div>
                 <List
                   size="small"
                   header={<h3>Exercises</h3>}
                   bordered
-                  dataSource={this.props.exercises
-                    .reduce((acc, current) => {
-                      const x = acc.find(
-                        item => item.exercise_name === current.exercise_name
-                      );
-                      if (!x) {
-                        return acc.concat([current]);
-                      } else {
-                        return acc;
-                      }
-                    }, [])
-                    .map(exercise => exercise.exercise_name)}
-                  renderItem={item => <List.Item>{item}</List.Item>}
+                  dataSource={this.props.currentWorkout.exercises}
+                  renderItem={(item) => (
+                    <List.Item>{item.exercise_name}</List.Item>
+                  )}
                 />
               </div>
-            ) : null}
+            )}
           </div>
         </Modal>
       </>

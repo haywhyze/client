@@ -9,6 +9,7 @@ const initialState = {
   newWorkout: null,
   loading: null,
   error: null,
+  currentWorkout: null,
 };
 
 const workouts = (state = initialState, action) => {
@@ -16,7 +17,7 @@ const workouts = (state = initialState, action) => {
     case type.ADD_WORKOUT_DETAILS:
       return {
         ...state,
-        newWorkout: { ...action.payload, exercises: [] }
+        newWorkout: { ...action.payload, exercises: [] },
       };
 
     case type.CREATE_WORKOUT:
@@ -25,64 +26,66 @@ const workouts = (state = initialState, action) => {
         workouts: state.workouts.concat(action.payload),
         loading: false,
         error: null,
-      }
-    
+      };
+
     case type.LOADING_CREATE_WORKOUT:
       return {
         ...state,
         loading: true,
         error: null,
-      }
+      };
 
     case type.CREATE_WORKOUT_ERROR:
       return {
         ...state,
         loading: false,
         error: action.payload,
-      }
+      };
 
     case type.FETCH_WORKOUTS:
       return {
         ...state,
-        workouts: action.workouts
+        workouts: action.workouts,
       };
 
     case type.FETCH_WORKOUT_DETAILS:
-      const addId = action.workoutDetails.exercises.map((exercise, index) => {
-        const copyOfData = Object.assign({}, exercise);
-        copyOfData.id = index;
-
-        return copyOfData;
-      });
-
-      const addFirstExercise = addId.filter(
-        workout => workout.exercise_name === addId[0].exercise_name
-      );
-
       return {
         ...state,
-        allExercises: addId,
-        workoutId: action.workout_id,
-        myWorkout: action.workoutDetails,
-        currentExercise: addFirstExercise
+        loading: action.payload,
+        error: "",
+      };
+
+    case type.FETCH_WORKOUT_DETAILS_SUCCCESS:
+      return {
+        ...state,
+        loading: false,
+        currentWorkout: action.payload,
+        error: "",
+      };
+
+    case type.FETCH_WORKOUT_DETAILS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
 
     case type.CHOOSE_EXERCISE:
       const filterCurrentExercise = state.allExercises.filter(
-        exercise => exercise.exercise_name === action.current_exercise
+        (exercise) => exercise.exercise_name === action.current_exercise
       );
       return {
         ...state,
-        currentExercise: filterCurrentExercise
+        currentExercise: filterCurrentExercise,
       };
 
     case type.FINISH_EXERCISE:
       const deleteExerciseFromCurrent = state.currentExercise.filter(
-        exercise => exercise.id !== action.exercise_id
+        (exercise) => exercise.id !== action.exercise_id
       );
 
       const deleteExerciseAll = state.allExercises.filter(
-        exercise => exercise.id !== action.exercise_id
+        (exercise) => exercise.id !== action.exercise_id
       );
 
       return {
@@ -93,10 +96,10 @@ const workouts = (state = initialState, action) => {
             ? deleteExerciseFromCurrent
             : deleteExerciseAll[0]
             ? deleteExerciseAll.filter(
-                workout =>
+                (workout) =>
                   workout.exercise_name === deleteExerciseAll[0].exercise_name
               )
-            : null
+            : null,
       };
 
     case type.ADD_WORKOUT_SUCCESS:
@@ -104,13 +107,13 @@ const workouts = (state = initialState, action) => {
 
       return {
         ...state,
-        savedWorkout: checkIfEmpty
+        savedWorkout: checkIfEmpty,
       };
 
     case type.ADD_WORKOUT_FAILURE:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
 
     case type.GET_SAVED_WORKOUT:
@@ -118,7 +121,7 @@ const workouts = (state = initialState, action) => {
         ...state,
         loading: true,
         error: null,
-        myWorkouts: null
+        myWorkouts: null,
       };
 
     case type.GET_SAVED_WORKOUT_SUCCESS:
@@ -126,14 +129,14 @@ const workouts = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        myWorkouts: action.payload
+        myWorkouts: action.payload,
       };
 
     case type.GET_SAVED_WORKOUT_FAILURE:
       return {
         ...state,
         loading: false,
-        error: action.payload
+        error: action.payload,
       };
 
     case type.DELETE_WORKOUT:
@@ -143,7 +146,7 @@ const workouts = (state = initialState, action) => {
 
       return {
         ...state,
-        savedWorkout: withoutDeletedWorkout
+        savedWorkout: withoutDeletedWorkout,
       };
 
     default:

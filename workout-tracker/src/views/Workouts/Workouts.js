@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   fetchWorkouts,
   fetchWorkoutDetails,
-  saveWorkout
+  saveWorkout,
 } from "../../store/actions/workoutsActions";
 import { notification, Empty } from "antd";
 
@@ -19,11 +19,11 @@ class Workouts extends React.Component {
     let user_id = Number(localStorage.getItem("userId"));
     const data = {
       workouts_id,
-      user_id
+      user_id,
     };
     notification[type]({
       message: "Successful!",
-      description: `The workout ${name} got added to your list.`
+      description: `The workout ${name} got added to your list.`,
     });
 
     this.props.saveWorkout(data);
@@ -32,21 +32,22 @@ class Workouts extends React.Component {
   render() {
     return (
       <>
-        {console.log(this.props.allExercises)}
         {this.props.workouts ? (
           <>
             <CardWrapper>
-              {this.props.workouts.map((workout, index) => {
+              {this.props.workouts.map((workout) => {
                 return (
                   <WorkoutCard
-                    key={index}
+                    key={workout.id}
                     image={
                       workout.image_url ||
                       "https://www.bodybuilding.com/images/2018/april/5-workous-that-are-insanely-efficient-at-torching-fat-signature-3-700xh.jpg"
                     }
+                    fetchDetails={this.props.fetchWorkoutDetails}
                     name={workout.workout_name}
                     description={workout.workout_description}
                     difficulty={workout.level}
+                    id={workout.id}
                     startWorkout={() =>
                       this.props.fetchWorkoutDetails(workout.id)
                     }
@@ -60,6 +61,9 @@ class Workouts extends React.Component {
                     }
                     myWorkout={false}
                     exercises={this.props.allExercises}
+                    currentWorkout={this.props.currentWorkout}
+                    loading={this.props.loading}
+                    error={this.props.error}
                   />
                 );
               })}
@@ -76,15 +80,17 @@ class Workouts extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log('object', state)
+const mapStateToProps = (state) => {
   return {
     workouts: state.workouts.workouts,
-    allExercises: state.workouts.allExercises
+    allExercises: state.workouts.allExercises,
+    currentWorkout: state.workouts.currentWorkout,
+    loading: state.workouts.loading,
+    error: state.workouts.error,
   };
 };
 export default connect(mapStateToProps, {
   fetchWorkouts,
   fetchWorkoutDetails,
-  saveWorkout
+  saveWorkout,
 })(Workouts);
