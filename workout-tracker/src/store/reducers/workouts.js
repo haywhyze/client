@@ -71,10 +71,23 @@ const workouts = (state = initialState, action) => {
       };
 
     case type.FETCH_WORKOUT_DETAILS_SUCCCESS:
+      const addId = action.payload.exercises.map((exercise, index) => {
+        const copyOfData = Object.assign({}, exercise);
+        copyOfData.id = index;
+
+        return copyOfData;
+      });
+
+      const addFirstExercise = addId.filter(
+        (workout) => workout.exercise_name === addId[0].exercise_name
+      );
       return {
         ...state,
         loadingWorkoutDetail: false,
         currentWorkout: action.payload,
+        allExercises: addId,
+        workoutId: action.id,
+        currentExercise: addFirstExercise,
         error: "",
       };
 
@@ -83,6 +96,13 @@ const workouts = (state = initialState, action) => {
         ...state,
         loadingWorkoutDetail: false,
         error: action.payload,
+      };
+
+    case type.START_WORKOUT:
+      return {
+        ...state,
+        loading: action.payload,
+        error: "",
       };
 
     case type.CHOOSE_EXERCISE:

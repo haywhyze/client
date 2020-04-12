@@ -27,6 +27,9 @@ class WorkoutCard extends React.Component {
   };
 
   render() {
+    const exerciseList =
+      this.props.currentWorkout &&
+      new Set(this.props.currentWorkout.exercises.map((e) => e.exercise_name));
     return (
       <>
         <Col>
@@ -92,10 +95,8 @@ class WorkoutCard extends React.Component {
                     size="small"
                     header={<h3>Exercises</h3>}
                     bordered
-                    dataSource={this.props.currentWorkout.exercises}
-                    renderItem={(item) => (
-                      <List.Item>{item.exercise_name}</List.Item>
-                    )}
+                    dataSource={[...exerciseList]}
+                    renderItem={(item) => <List.Item>{item}</List.Item>}
                   />
                 </div>
               )

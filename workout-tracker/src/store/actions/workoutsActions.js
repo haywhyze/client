@@ -9,12 +9,16 @@ export const FETCH_WORKOUT_DETAILS_SUCCCESS = "FETCH_WORKOUT_DETAILS_SUCCCESS";
 export const FETCH_WORKOUT_DETAILS_FAILURE = "FETCH_WORKOUT_DETAILS_FAILURE";
 
 export const START_WORKOUT = "START_WORKOUT";
+export const START_WORKOUT_SUCCESS = "START_WORKOUT_SUCCESS";
+export const START_WORKOUT_FAILURE = "START_WORKOUT_FAILURE";
 
 export const CHOOSE_EXERCISE = "CHOOSE_EXERCISE";
 
 export const FINISH_EXERCISE = "FINISH_EXERCISE";
 
 export const END_WORKOUT = "END_WORKOUT";
+export const END_WORKOUT_SUCCESS = "END_WORKOUT_SUCCESS";
+export const END_WORKOUT_FAILURE = "END_WORKOUT_FAILURE";
 
 export const DELETE_WORKOUT = "DELETE_WORKOUT";
 
@@ -36,153 +40,195 @@ const workouts = `${process.env.REACT_APP_BASE_URL}/workouts`;
 
 export const genericAction = (type, payload) => ({
   type,
-  payload
+  payload,
 });
 
-export const addWorkoutDetails = workoutDetails => {
+export const addWorkoutDetails = (workoutDetails) => {
   return { type: ADD_WORKOUT_DETAILS, payload: workoutDetails };
 };
 
-export const createWorkout = (fullWorkoutDetails, history) => dispatch => {
+export const createWorkout = (fullWorkoutDetails, history) => (dispatch) => {
   dispatch({
     type: LOADING_CREATE_WORKOUT,
-    payload: true
+    payload: true,
   });
   axiosWithAuth()
     .post(workouts, fullWorkoutDetails)
-    .then(res => {
+    .then((res) => {
       dispatch({
         type: CREATE_WORKOUT,
-        payload: res.data
+        payload: res.data,
       });
-      history.push('/workouts');
+      history.push("/workouts");
     })
-    .catch(error => {
+    .catch((error) => {
       dispatch({
         type: CREATE_WORKOUT_ERROR,
-        payload: error.response.data.errorMessage
+        payload: error.response.data.errorMessage,
       });
     })
     .finally(() => ({
       type: LOADING_CREATE_WORKOUT,
-      payload: false
+      payload: false,
     }));
 };
 
 // action dispatcher
-export const fetchWorkouts = () => dispatch => {
+export const fetchWorkouts = () => (dispatch) => {
   dispatch({
     type: FETCH_WORKOUTS,
-    payload: true
+    payload: true,
   });
   axiosWithAuth()
     .get(workouts)
-    .then(res => {
+    .then((res) => {
       dispatch({ type: FETCH_WORKOUTS_SUCCESS, payload: res.data });
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch({
         type: FETCH_WORKOUTS_FAILURE,
-        payload: err.response.data.errorMessage
+        payload: err.response.data.errorMessage,
       });
     });
 };
 
-export const fetchWorkoutDetails = (workout_id) => dispatch => {
+export const fetchWorkoutDetails = (workout_id) => (dispatch) => {
   dispatch({
     type: FETCH_WORKOUT_DETAILS,
-    payload: true
+    payload: true,
   });
   axiosWithAuth()
     .get(`${workouts}/${workout_id}`)
-    .then(res => {
+    .then((res) => {
       dispatch({
         type: FETCH_WORKOUT_DETAILS_SUCCCESS,
         payload: res.data.data,
+        id: workout_id,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch({
         type: FETCH_WORKOUT_DETAILS_FAILURE,
-        payload: err.response.data.errorMessage
+        payload: err.response.data.errorMessage,
       });
     });
 };
 
-export const chooseExercise = exercise_name => {
+export const chooseExercise = (exercise_name) => {
   return { type: CHOOSE_EXERCISE, current_exercise: exercise_name };
 };
 
-export const finishExercise = exercise_id => {
+export const finishExercise = (exercise_id) => {
   return { type: FINISH_EXERCISE, exercise_id: exercise_id };
 };
 
-export const endWorkout = (workout_id, history) => dispatch => {
+export const startWorkout = (workout_id) => (dispatch) => {
+  dispatch({
+    type: FETCH_WORKOUT_DETAILS,
+    payload: true,
+  });
+  axiosWithAuth()
+    .get(`${workouts}/${workout_id}`)
+    .then((res) => {
+      dispatch({
+        type: FETCH_WORKOUT_DETAILS_SUCCCESS,
+        payload: res.data.data,
+        id: workout_id,
+      });
+      dispatch({
+        type: START_WORKOUT,
+        payload: true,
+      });
+      return axiosWithAuth()
+        .post(`${workouts}/${workout_id}/start`)
+        .then((res) => {
+          dispatch({
+            type: START_WORKOUT_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+          dispatch({
+            type: START_WORKOUT_FAILURE,
+            payload: err.response.data.message,
+          });
+        });
+    })
+    .catch((err) => {
+      dispatch({
+        type: FETCH_WORKOUT_DETAILS_FAILURE,
+        payload: err.response.data.errorMessage,
+      });
+    });
+};
+
+export const endWorkout = (workout_id, history) => (dispatch) => {
   // type LOADING needs to be added (also for the redux state)
 
   return axiosWithAuth()
     .post(`${workouts}/${workout_id}/end`)
-    .then(res => {
+    .then((res) => {
       return axiosWithAuth()
         .get(`${process.env.REACT_APP_BASE_URL}/workouts/history`)
-        .then(res => {
+        .then((res) => {
           dispatch({ type: END_WORKOUT, session: res.data.workoutHistory });
           if (history) {
-            setTimeout(() => history.push("/dashboard/stats"), 1500);
+            setTimeout(() => history.push("/dashboard"), 1500);
           }
         });
     })
-    .catch(err => {
+    .catch((err) => {
       // type ERROR needs to be added (also for the redux state)
     });
 };
 
-export const deleteWorkout = workout_id => dispatch => {
+export const deleteWorkout = (workout_id) => (dispatch) => {
   const userId = Number(localStorage.getItem("userId"));
 
   const workoutAndUser = {
     workouts_id: workout_id,
-    user_id: userId
+    user_id: userId,
   };
   axiosWithAuth()
     .delete(`${workouts}/all-saved`, { data: workoutAndUser })
-    .then(res => {
+    .then((res) => {
       return axiosWithAuth()
         .get(`${workouts}/all-saved/${userId}`)
-        .then(res => {
+        .then((res) => {
           dispatch(genericAction(DELETE_WORKOUT, res.data));
         });
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch(genericAction(GET_SAVED_WORKOUT_FAILURE, err));
     });
 };
 
-export const saveWorkout = data => dispatch => {
+export const saveWorkout = (data) => (dispatch) => {
   dispatch(genericAction(ADD_WORKOUT, true));
   axiosWithAuth()
     .post(`${workouts}/save-workout`, data)
-    .then(res => {
+    .then((res) => {
       return axiosWithAuth()
         .get(`${workouts}/all-saved/${data.user_id}`)
-        .then(res => {
+        .then((res) => {
           dispatch(genericAction(ADD_WORKOUT_SUCCESS, res.data));
         });
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch(genericAction(ADD_WORKOUT_FAILURE, err));
     });
 };
 
-export const getSavedWorkout = () => dispatch => {
+export const getSavedWorkout = () => (dispatch) => {
   dispatch(genericAction(GET_SAVED_WORKOUT, true));
   const userId = localStorage.getItem("userId");
   axiosWithAuth()
     .get(`${workouts}/all-saved/${userId}`)
-    .then(res => {
+    .then((res) => {
       dispatch(genericAction(GET_SAVED_WORKOUT_SUCCESS, res.data));
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch(genericAction(GET_SAVED_WORKOUT_FAILURE, err));
     });
 };

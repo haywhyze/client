@@ -4,6 +4,7 @@ import {
   fetchWorkouts,
   fetchWorkoutDetails,
   saveWorkout,
+  startWorkout
 } from "../../store/actions/workoutsActions";
 import { notification, Empty, Spin } from "antd";
 
@@ -38,6 +39,7 @@ class Workouts extends React.Component {
       error,
       deleteWorkout,
       fetchWorkoutDetails,
+      startWorkout,
       loadingWorkoutDetail,
     } = this.props;
 
@@ -61,12 +63,12 @@ class Workouts extends React.Component {
                       workout.image_url ||
                       "https://www.bodybuilding.com/images/2018/april/5-workous-that-are-insanely-efficient-at-torching-fat-signature-3-700xh.jpg"
                     }
-                    fetchDetails={fetchWorkoutDetails}
+                    fetchDetails={() => fetchWorkoutDetails(workout.id)}
                     name={workout.workout_name}
                     description={workout.workout_description}
                     difficulty={workout.level}
                     id={workout.id}
-                    startWorkout={() => fetchWorkoutDetails(workout.id)}
+                    startWorkout={() => startWorkout(workout.id)}
                     deleteWorkout={() => deleteWorkout(workout.id)}
                     addWorkout={() =>
                       this.addWorkout(
@@ -108,6 +110,7 @@ const mapStateToProps = (state) => {
 };
 export default connect(mapStateToProps, {
   fetchWorkouts,
+  startWorkout,
   fetchWorkoutDetails,
   saveWorkout,
 })(Workouts);
